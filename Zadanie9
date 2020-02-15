@@ -1,0 +1,16 @@
+# Zadanie 9.
+# 9. Utwórz skrypt z interfejsem tekstowym, który wyliczy sumę n kolejnych liczb (użytkownik podaje pierwszą i ostatnią liczbę sumy). Uwaga - w zadaniu należy zbudować funkcję własną realizującą dane zadanie.
+
+print("Ten program obliczy sumę n kolejnych liczb. Zapraszam.")
+print("Podaj pierwszą liczbę:")
+x = int(input())
+print("Podaj ostatnią liczbę:")
+y = int(input())
+
+def suma(x, y):
+    sumeczka = ((x + y)/2)*(y-x+1)
+    return sumeczka
+
+print("Oto suma tych n liczb:")
+print(int(suma(x, y)))
+print("Dzięki za skorzystanie z programu :)")
