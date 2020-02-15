@@ -1,0 +1,20 @@
+# Zadanie 12.
+# Utworzyć skrypt z interfejsem tekstowym obliczający n-ty element ciągu Fibonacciego - wykonać zadanie iteracyjnie i rekurencyjnie.
+
+
+print("Ten program obliczy n-ty element ciągu Fibonacciego:")
+# Sposób iteratywny:
+
+def fib_iter (n):
+    a=0
+    b=1
+    for i in range (0,n-1):
+        a,b = b, a+b
+    return b
+    
+print ("Wpisz numer wyszukiwanego elementu ciągu:")
+
+f = int(input())
+wynik = fib_iter(f)
+print ("Szukany n-ty element ciągu:")
+print (wynik)
