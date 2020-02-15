@@ -1,0 +1,27 @@
+# Zadanie 28.
+# Utwórz funkcję, która jako argument będzie przyjmować dwie listy o równej liczbie elementów, a jej wynikiem będzie współczynnik korelacji.
+
+from math import sqrt
+
+def corelation(x, y):
+    if len(x) != len(y):
+        return('Listy muszą mieć taką samą długość.')
+    else:
+        sumaXY = 0
+        sumaX = 0
+        sumaY = 0
+        sumaX2 = 0
+        sumaY2 = 0
+
+        for i in range(len(x)):
+            sumaXY += x[i]*y[i]
+            sumaX += x[i]
+            sumaY += y[i]
+            sumaX2 += x[i]**2
+            sumaY2 += y[i]**2
+
+        cor1 = (len(x) * sumaXY - sumaX*sumaY)
+        cor2 = sqrt((len(x) * sumaX2 - sumaX**2)*(len(y) * sumaY2 - sumaY**2))
+
+        return cor1/cor2
+corelation([5.0,6.3,3.4,5.6,3.4,6.9,2.5,4.5,5.5],[5.5,5.2,3.7,5.5,3.4,6.9,3.0,4.0,5.8])
