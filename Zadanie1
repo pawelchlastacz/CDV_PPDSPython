@@ -1,0 +1,11 @@
+# Zadanie 1. 
+
+#Napisz skrypt, który będzie wyświetlał wszystkie kolejne dzielniki wprowadzonej liczby
+
+a=int(input("Wpisz liczbę, której dzielników szukasz : "))
+for i in range (1,a):   
+    if a%i==0:  
+        print(i)
+
+print('Oto szukane dzielniki :)')
+
