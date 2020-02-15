@@ -1,0 +1,25 @@
+# Zadanie 22.
+# Utwórz fukcję, która jako argument będzie przyjmować listę liczb zmiennoprzecinkowych, a jej wynikiem będzie mediana (skorzystaj z metody sort działającej na standardowych listach).
+
+import numpy, math
+
+def mediana(wartosci):
+    length = len(wartosci)
+
+    wartosci.sort()
+    if ((length % 2) == 0):
+        return ((wartosci[int(length / 2 - 1)] + wartosci[int(length / 2)]) / 2)
+    else:
+        return wartosci[int(length / 2)]
+
+# Parzysta liczba wartosci:
+wartosci_p = [12.3,34.6,56.7,66.6,69.6,70.3,77.4,79.4,80.3,85.6,88.7,90.1,99.9,100.0]
+
+# Nieparzysta liczba wartosci:
+wartosci_np = [12.3,34.6,56.7,66.6,69.6,70.3,77.4,79.4,80.3,85.6,88.7,90.1,99.9]
+
+print("Parzysta liczba pomiarów; mediana wg numpy/funkcji: " +str(len(wartosci_p)),";",
+      str(numpy.median(wartosci_p)), "/", str(mediana(wartosci_p)) )
+
+print("Nieparzysta liczba pomiarów; mediana wg numpy/funkcji; " +str(len(wartosci_np)), ";",
+      str(numpy.median(wartosci_np)), "/" , str(mediana(wartosci_np)))
