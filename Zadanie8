@@ -1,0 +1,27 @@
+# Zadanie 8.
+# W klasie przeprowadzono sprawdzian, za który uczniowie mogli otrzymać maksymalnie 40 punktów. Skala ocen w szkole jest następująca: 0-39% - ndst, 40-49% - dop, 50-69% - dst, 70-84% - db, 85-99% - bdb, 100% - cel. Utwórz skrypt z interfejsem tekstowym, który na podstawie podanej liczby punktów ze sprawdzianu wyświetli ocenę jaka się należy (skorzystaj z konstrukcji if, elif, else)
+
+print ("Dowiesz się zaraz, jaką ocenę uzyskałeś, ze sprawdzianu. Oto zasady oceniania:")
+
+print (" 0-39% - ocena ndst,")  
+print ("40-49% - ocena dopuszczająca ")  
+print ("50-69% - ocena dostateczna") 
+print ("70-84% - ocena dobra")
+print ("85-99% - ocena bardzo dobra")
+print ("100%   - ocena celująca")
+
+print ("Wpisz liczbę punktów zdobytych na sprawdzianie:")
+
+p = int(input())
+if (p<16):
+    print("Twoja ocena: niedostateczna")
+elif (p>=16 and p<20):
+    print("Twoja ocena: dopuszczająca")
+elif (p>=20 and p<28):
+    print("Twoja ocena: dostateczna")
+elif (p>=28 and p<34):
+    print("Twoja ocena: dobra")
+elif (p>=34 and p<40):
+    print("Twoja ocena: bardzo dobra")
+elif (p==40):
+    print("Twoja ocena: celująca, gratulacje! :D")
