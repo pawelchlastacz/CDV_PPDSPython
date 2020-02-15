@@ -1,0 +1,17 @@
+# Zadanie 24. 
+# Utwórz fukcję, która jako argument będzie przyjmować listę liczb zmiennoprzecinkowych, a jej wynikiem będzie odchylenie standardowe średniej.
+
+lista = [1.0,1.6,1.9,2.0,2.2,2.3,2.5,2.9,3.3,3.6,4.0,4.2,4.4,5.0,5.3,5.6]
+
+
+def odchylenie_standardowe(x):
+     sr = sum(x) / len(x)
+     suma = 0
+     for i in range(len(x)-1):
+       suma = suma + (x[i] - sr)**2
+     wariancja = suma/len(x)
+     return wariancja**0.5
+ 
+a = odchylenie_standardowe(lista)
+
+print(a)
