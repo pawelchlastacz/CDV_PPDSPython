@@ -1,0 +1,183 @@
+#Projekt 4:
+
+class Matrix():
+    
+    
+    def __init__(self, m, n):
+        self.m = m #to jest liczba wierzy macierzy
+        self.n = n #a to liczba kolumn macierzy 
+    
+    def fill(self):
+        self.body = []
+        for i in range(self.m):
+            init_list = []
+            for j in range(self.n):
+                element = float(input("aij = "))
+                init_list.append(element)
+            
+            self.body.append(init_list)
+            
+    def zeros(self):
+        self.body = []
+        for i in range(self.m):
+            init_list = []
+            for j in range(self.n):
+                element = 0
+                init_list.append(element)
+            
+            self.body.append(init_list)
+            
+    def ones(self):
+        self.body = []
+        for i in range(self.m):
+            init_list = []
+            for j in range(self.n):
+                element = 1
+                init_list.append(element)
+            
+            self.body.append(init_list)
+            
+    def unit(self):
+        if(self.m == self.n):
+            self.body = []
+            for i in range(self.m):
+                init_list = []
+                for j in range(self.n):
+                    if (i==j):
+                        element = 1
+                    else:
+                        element = 0
+                    init_list.append(element)
+            
+                self.body.append(init_list)
+        else:
+            print("dimensions not equal")
+            
+    def complement(self):
+        if len(self.rows) != len(self.cols):
+            raise ShapeMismatchError(
+               'Cannot compute complementary matrix for non-square matrix'
+            )
+        det_list = []
+        det_matrix = []
+        for i in range(0, len(self.rows)):
+            for col in range(0, len(self.cols)):
+                helper_matrix = deepcopy(self)
+                for row in range(0, len(self.rows)):
+                    del helper_matrix[row][col]
+
+                del helper_matrix[i]
+                
+                helper_list = []
+                for row in helper_matrix.rows:
+                    for element in row:
+                        helper_list.append(element)
+                det_list.append(helper_list)
+            
+        for matrix in det_list:
+            det_matrix.append(Matrix(matrix, len(self.rows)-1, len(self.cols)-1).det())
+                
+        for i in range(1, len(det_matrix), 2):
+            value = det_matrix[i]
+            det_matrix[i] = -value
+            
+        return Matrix(det_matrix, len(self.rows), len(self.cols))
+    
+    def inverse(self, inplace=False):
+        return self.complement().transpose().multiply_by_number(1/self.det())
+            
+    def add(self, other):
+        if(self.n == other.n and self.m == other.m and len(self.body) != 0 and len(other.body) != 0):
+            for i in range(self.m):
+                for j in range(self.n):
+                    self.body[i][j] = self.body[i][j] + other.body[i][j]
+            
+        else:
+            print("Dimensions are not equal")
+            
+    def __getitem__(self, rownum):
+        return self.rows[rownum]
+    
+    def __delitem__(self, rownum):
+        del self.rows[rownum]
+    
+    def __validate_shape(self, matrix):
+        if self.shape != matrix.shape:
+            raise ShapeMismatchError(
+                'The given matrix has different shape than the origin matrix')
+
+    def __basic_operation(self, matrix, operation):
+        new_list = []
+        for row in range(0, len(self.rows)):
+            new_row = [operation(x,y) for x,y in zip(self.rows[row], matrix.rows[row])]
+            for nr in new_row:
+                new_list.append(nr)
+
+        return new_list
+            
+            
+    def substr(self, other):
+        if(self.n == other.n and self.m == other.m and len(self.body) != 0 and len(other.body) != 0):
+            for i in range(self.m):
+                for j in range(self.n):
+                    self.body[i][j] = self.body[i][j] - other.body[i][j]
+            
+        else:
+            print("dimensions not equal")
+     
+    
+    def mult(self, other):
+        if(self.n == other.n and self.m == other.m and len(self.body) != 0 and len(other.body) != 0):
+            for i in range(self.m):
+                for j in range(self.n):
+                    self.body[i][j] = self.body[i][j] * other.body[i][j]
+                    
+    
+        
+        
+    def div(self, other):
+        if(self.n == other.n and self.m == other.m and len(self.body) != 0 and len(other.body) != 0):
+            for i in range(self.m):
+                for j in range(self.n):
+                    self.body[i][j] = self.body[i][j] / other.body[i][j]
+                    
+                    
+    def multByNumber(self, a):
+        for i in range(self.m):
+            for j in range(self.n):
+                self.body[i][j] = a*self.body[i][j]
+        
+    def divByNumber(self, a):
+        for i in range(self.m):
+            for j in range(self.n):
+                self.body[i][j] = a/self.body[i][j]
+ 
+    
+    def __getitem__(self, item):
+        if isinstance(item, (int, slice)):
+            return self.__class__(self.value[item])
+        return [self.value[i] for i in item]
+    
+    def __setitem__(self, item, value):
+        if isinstance(item, int):
+            self.value[item] = value
+        elif isinstance(item, slice):
+            raise ValueError('Cannot interpret slice with multiindexing')
+        else:
+            for i in item:
+                if isinstance(i, slice):
+                    raise ValueError('Cannot interpret slice with multiindexing')
+                self.value[i] = value
+    
+    def __delitem__(self, item):
+        if isinstance(item, int):
+            del self.value[item]
+        elif isinstance(item, slice):
+            del self.value[item]
+        else:
+            if any(isinstance(elem, slice) for elem in item):
+                raise ValueError('Cannot interpret slice with multiindexing')
+            item = sorted(item, reverse=True)
+            for elem in item:
+                del self.value[elem]
+            
